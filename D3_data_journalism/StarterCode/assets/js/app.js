@@ -39,10 +39,7 @@ d3.csv("assets/data/data.csv", function(data){
   // console.log(data);
 
   // Start manipulating the chart with the data.
-  // create the x linearscales and y slinearscales
-  // var xLinScale = d3.scaleLinear().domain([9, d3.max(data, function(d){
-  //   return +d.poverty;
-  // })]).range([0, widthPostMargins]);
+  // create the x linearscales and y linearscales
   var xLinScale = d3.scaleLinear().domain([9, d3.max(data, function(d){
     return +d.poverty;
   })]).range([0, widthPostMargins]);
