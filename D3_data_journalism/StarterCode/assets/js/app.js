@@ -11,25 +11,30 @@ d3.csv("assets/data/data.csv", function(data){
   // Convert poverty value and healthcare to int instead of string aka = +(string)
   data.poverty = +data.poverty;
   data.healthcare = +data.healthcare;
-  console.log(data.poverty);
   return data;
 }).then(function(data){
   // All the data in nice objects
   // console.log(data);
 })
 
+// Create the svg
+var widthPreMargins = 800;
 
+var heightPreMargins = 500;
 
-// Scalable Vector Graphics setup(svg)
-var svgWidth = 700;
-
-var svgHeight = 400;
-
-var margin = {
-  top: 20,
-  right: 40,
-  bottom: 80,
-  left:50
+var svgMargins = {
+  top: 30,
+  right: 35,
+  bottom: 85,
+  left: 55
 };
 
-var width = svgWidth - margin.left - margin.right;
+var widthPostMargins = widthPreMargins - svgMargins.left - svgMargins.right;
+
+var heightPostMargins = heightPreMargins - svgMargins.top - svgMargins.bottom;
+
+// Put it all together/ wrap it up to hold the chart and fix the corners with the margin
+var svgWrapper = d3.select("#scatter").append("svg").attr("width", widthPreMargins).attr("height", heightPreMargins);
+
+// svg group to smash together the different elements
+var svgChartGroup = svgWrapper.append("g").attr("transform", `translate(${svgMargins.left}, ${svgMargins.top})`);
