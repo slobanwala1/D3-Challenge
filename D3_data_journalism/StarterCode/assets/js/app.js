@@ -11,8 +11,8 @@ var widthPreMargins = 800;
 var heightPreMargins = 500;
 
 var svgMargins = {
-  top: 30,
-  right: 35,
+  top: 25,
+  right: 45,
   bottom: 85,
   left: 55
 };
@@ -40,12 +40,12 @@ d3.csv("assets/data/data.csv", function(data){
 
   // Start manipulating the chart with the data.
   // create the x linearscales and y linearscales
-  var xLinScale = d3.scaleLinear().domain([9, d3.max(data, function(d){
+  var xLinScale = d3.scaleLinear().domain([8, d3.max(data, function(d){
     return +d.poverty;
   })]).range([0, widthPostMargins]);
 
 
-  var yLinScale = d3.scaleLinear().domain([3, d3.max(data, function(d){
+  var yLinScale = d3.scaleLinear().domain([2, d3.max(data, function(d){
     return +d.healthcare;
   })]).range([heightPostMargins, 0]);
 
@@ -56,4 +56,13 @@ d3.csv("assets/data/data.csv", function(data){
   // append the axises to our svgChartGroup
   svgChartGroup.append("g").attr("transform", `translate(0, ${heightPostMargins})`).call(xAxis);
   svgChartGroup.append("g").call(yAxis);
+
+  // Add the data to the chart, make them circles as in the prompt
+  var chartData = svgChartGroup.selectAll("circle").data(data).enter().append("circle")
+  .attr("cx", function(data, index){
+    return xLinScale(data.poverty);
+  })
+  .attr("cy", function(data, index){
+    return yLinScale(data.healthcare-0.28);
+  }).attr("r", "15").attr("fill", "blue").classed("stateCircle", true);
 })
