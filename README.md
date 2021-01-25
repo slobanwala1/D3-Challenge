@@ -36,3 +36,5 @@ Images:
 [App logic](https://github.com/slobanwala1/D3-Challenge/blob/main/D3_data_journalism/StarterCode/assets/js/app.js)
 
 [HTML/Index](https://github.com/slobanwala1/D3-Challenge/blob/main/D3_data_journalism/StarterCode/index.html)
+
+** Thanks for the learning experience! **
