@@ -6,14 +6,14 @@
 
 //---------------------------------------------------------------------------------------------------------------------
 // Create the svg dimensions and margins
-var widthPreMargins = 960;
+var widthPreMargins = 1200;
 
-var heightPreMargins = 700;
+var heightPreMargins = 800;
 
 var svgMargins = {
   top: 20,
   right: 40,
-  bottom: 60,
+  bottom: 80,
   left: 100
 };
 
@@ -40,6 +40,7 @@ d3.csv("assets/data/data.csv", function(healthData){
   // Check loaded data
   // console.log(data);
 
+  // Set the linear scales so that the circles are displayed properly
   var xLinScale = d3.scaleLinear()
     .domain([8, d3.max(data,function(d){
     return +d.poverty;
@@ -47,12 +48,13 @@ d3.csv("assets/data/data.csv", function(healthData){
     .range([0, widthPostMargins]);
 
   var yLinScale = d3.scaleLinear()
-    .domain([2, d3.max(data,function(d){
+    .domain([0, d3.max(data,function(d){
     return +d.healthcare;
     })])
     .range([heightPostMargins, 0]);
 
-  // We need the xy axis aka bottom and left using the linear scales ^^^
+
+  // The bottoms of the axis's
   var bottomAxis = d3.axisBottom(xLinScale);
   var leftAxis = d3.axisLeft(yLinScale);
 
@@ -69,7 +71,7 @@ d3.csv("assets/data/data.csv", function(healthData){
   // Call the toolTip that we just set up
   svgChartGroup.call(svgToolTip);
 
-  // Add the data to the chart, make them circles as in the prompt
+  // Add the data to the chart, make them circles as in the prompt, add in the mouse events
   svgChartGroup.selectAll("circle").data(data).enter().append("circle")
   .attr("cx", function(data, index){
     return xLinScale(data.poverty);
@@ -95,7 +97,8 @@ d3.csv("assets/data/data.csv", function(healthData){
     return data.abbr;
   })
 
-  svgChartGroup.append("g").attr("transform", `translate(0, ${heightPostMargins})`).call(bottomAxis);
+  // Append the x and y axis's to the chart
+  svgChartGroup.append("g").classed("x-axis", true).attr("transform", `translate(0, ${heightPostMargins})`).call(bottomAxis);
 
   svgChartGroup.append("g").call(leftAxis);
 
@@ -103,4 +106,5 @@ d3.csv("assets/data/data.csv", function(healthData){
   svgChartGroup.append("text").attr("transform", "rotate(-90)").attr("y", 0-svgMargins.left).attr("x", 0-heightPostMargins/2).attr("dy", "1em").attr("class", "axis-text").text("Healthcare (%)");
   // Append x axis label
   svgChartGroup.append("text").attr("transform", "translate(" + widthPostMargins / 2 + " ," + (heightPostMargins + svgMargins.top + 30) + ")").attr("class", "axis-text").text("Poverty (%)");
+
 });
