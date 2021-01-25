@@ -37,4 +37,4 @@ Images:
 
 [HTML/Index](https://github.com/slobanwala1/D3-Challenge/blob/main/D3_data_journalism/StarterCode/index.html)
 
-** Thanks for the learning experience! **
+**Thanks for the learning experience!**
