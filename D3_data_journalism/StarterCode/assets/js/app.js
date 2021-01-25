@@ -114,7 +114,7 @@ d3.csv("assets/data/data.csv", function(healthData){
   })
   .attr("cy", function(data, index){
     return yLinScale(data.healthcare);
-  }).attr("r", "15").attr("fill", "blue")
+  }).attr("r", "15").attr("fill", "lightblue")
   .on("mouseover", function(data) {
     svgToolTip.show(data, this);
   })
