@@ -115,11 +115,11 @@ d3.csv("assets/data/data.csv", function(healthData){
   .attr("cy", function(data, index){
     return yLinScale(data.healthcare);
   }).attr("r", "15").attr("fill", "blue")
-  .on("mouseenter", function(data) {
-    svgToolTip.show(data);
+  .on("mouseover", function(data) {
+    svgToolTip.show(data, this);
   })
   .on("mouseout", function(data, index) {
-    svgToolTip.hide(data);
+    svgToolTip.hide(data, this);
   });
 
   // Display the state abbreviations on the points
